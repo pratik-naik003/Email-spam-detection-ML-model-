@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 import pickle
 
 # 1. Load the data
-df = pd.read_csv("new_ml_data.csv")
+df = pd.read_csv("dataset.csv")
 
 # 2. Encoding
 label_encoder = LabelEncoder()
@@ -15,7 +15,8 @@ df['label'] = label_encoder.fit_transform(df['label'])  # spam=1, ham=0
 # 3. Split the data
 X = df['text']
 y = df['label']
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 4. Vectorize the text
 vectorizer = TfidfVectorizer()
@@ -32,4 +33,4 @@ with open("model.pkl", "wb") as f:
 with open("vectorizer.pkl", "wb") as f:
     pickle.dump(vectorizer, f)
 
-print("✅ Model and vectorizer saved!")
+print("Model trained successfully")
